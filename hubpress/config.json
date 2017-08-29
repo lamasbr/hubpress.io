@@ -2,7 +2,8 @@
   "meta": {
     "username": "lamasbr",
     "repositoryName": "lamasbr.github.io",
-    "branch": "master"
+    "branch": "master",
+    "cname": ""
   },
   "theme": {
     "name": "casper"
@@ -22,5 +23,27 @@
       null,
       null
     ]
+  },
+  "site": {
+    "title": "Anotações para não esquecer",
+    "description": "Algumas anotações importantes (ou não) pra mim!",
+    "logo": "",
+    "cover": "",
+    "delay": "",
+    "postsPerPage": "",
+    "googleAnalytics": "",
+    "disqus": "lamasbr"
+  },
+  "socialnetwork": {
+    "email": "",
+    "github": "lamasbr",
+    "twitter": "lamasbr",
+    "facebook": "llsilvabr",
+    "googleplus": "",
+    "instagram": "llamasjf",
+    "pinterest": "",
+    "flickr": "",
+    "linkedin": "",
+    "stackoverflow": ""
   }
 }
