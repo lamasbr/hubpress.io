@@ -2,7 +2,7 @@
 // :hp-image: /covers/cover.png
 :published_at: 2017-08-29
 :hp-tags: Linux, Ubuntu, Squid, Samba, squidGuard, NTLM, Active Directory
-:hp-alt-title: How to install Squid + squidGuard using NTLM transparent auth (Active Directory) on Ubuntu 16.04.3 LTS
+:hp-alt-title: How to install Samba + Squid + squidGuard using NTLM transparent auth (Active Directory) on Ubuntu 16.04.3 LTS
 
 Acredito que qualquer organização que deixe o acesso à internet totalmente liberado para os seus colaboradores, além de perder em produtividade, está perdendo dinheiro. Até porque, tempo é dinheiro.
 
