@@ -42,9 +42,131 @@ root@proxy~#: apt update ; apt upgrade
 
 === Instalando e configurando os pacotes básicos e necessários
 
+Instale os pacotes necessários utilizando comando abaixo:
+
 [source,bash]
 ----
 root@proxy~#: apt install squid squidguard telnet tcpdump ntpdate samba winbind vim tcpdump mc xz-utils rsync
 ----
 
-Continua... 
+==== Edite o arquivo /etc/hosts
+
+Abra o arquivo /etc/hosts e ajuste o endereço do seu servidor proxy e seu servidor Active Directory nele:
+[source]
+----
+10.0.0.2	proxy.dominio.local	proxy
+10.0.0.1	ad.dominio.local	ad
+----
+
+==== Edite o arquivo /etc/samba/smb.conf
+
+Abra o arquivo /etc/samba/smb.conf e deixe conforme a configuração abaixo:
+
+[source]
+----
+[global]
+        unix charset = ISO-8859-1
+        workgroup = DOMINIO
+        server string = proxy
+        netbios name = proxy
+        log level = 5
+        load printers = no
+        log file = /var/log/samba/log.%m
+        max log size = 500
+        realm = DOMINIO.LOCAL
+        security = ads
+        auth methods = winbind
+        password server = 10.0.0.1
+        winbind separator = +
+        encrypt passwords = yes
+        printcap name = cups
+        winbind cache time = 15
+        winbind enum users = yes
+        winbind enum groups = yes
+        winbind use default domain = yes
+        idmap uid = 10000-20000
+        idmap gid = 10000-20000
+        socket options = TCP_NODELAY SO_RCVBUF=8192 SO_SNDBUF=8192
+        local master = no
+        os level = 233
+        domain master = no
+        preferred master = no
+        domain logons = no
+        dns proxy = no
+        ldap ssl = no
+        printing = cups
+        disable spoolss = yes
+        show add printer wizard = no
+        template shell = /bin/bash
+        template homedir = /home/%U
+----
+
+==== Inserindo o Samba no domínio
+
+Insira o servidor Samba no domínio com o comando:
+
+[source,bash]
+----
+root@proxy~#: net ads join -U dominio\administrador
+----
+
+Insira a senha do administrador do domínio, neste exemplo é 123456.
+
+==== Edite o arquivo /etc/init.d/winbind
+
+Modifique a linha 43 do arquivo /etc/init.d/winbind para que toda vez que inicie, modifique o grupo do diretório /var/run/samba/winbindd_privileged e /var/lib/samba/winbindd_privileged para root:proxy. 
+
+[TIP]
+No Ubuntu o usuário do Squid é 'proxy'.
+
+[source,bash]
+----
+chown root:proxy $PIDDIR/winbindd_privileged/ || return 1
+chown root:proxy /var/lib/samba/winbindd_privileged/ || return 1
+----
+
+Altere a permissão do arquivo /usr/bin/ntlm_auth para que possa ser executado como root. Para isso, utilize o comando:
+
+[source,bash]
+----
+root@proxy~#: chmod 6755 /usr/bin/ntlm_auth
+----
+
+Então, reinicie o Samba e o Winbind com o comando:
+
+[source,bash]
+----
+root@proxy~#: /etc/init.d/samba restart ; /etc/init.d/winbind restart
+----
+
+=== Testando a comunicação do Samba/Winbind com o servidor Active Directory
+
+Para assegurar que o seu servidor Samba/Winbind está comunicando perfeitamente com o servidor Active Directory, execute os comandos abaixo. Cada comando deverá retornar exatamente como exibido:
+
+[source,bash]
+----
+root@proxy~#: wbinfo -t
+checking the trust secret for domain DOMINIO via RPC calls succeeded
+----
+
+[source,bash]
+----
+root@proxy~#: wbinfo -a administrador
+----
+
+Será solicitada a senha do usuário administrador duas vezes e então deverá retornar a saída abaixo:
+
+[source]
+----
+plaintext password authentication succeeded
+challenge/response password authentication succeeded
+----
+
+Caso tudo tenha ocorrido como esperado até aqui, prossiga para os próximos passos. Caso contrário, reveja as configurações pois algo pode ter passado despercebido ou algum arquivo ter sido configurado errado.
+
+
+
+
+
+
+
