@@ -27,7 +27,10 @@ Para que a comunicação entre o Samba/Winbind e o Active Directory ocorra sem p
 
 No seu controlador de domínio (ad.dominio.local), abra o console de gerenciamento do DNS, expanda a 'zona de pesquisa direta' e adicione a entrada do tipo 'Novo Host (A ou AAAA)' informando o nome como 'proxy' e o IP como '10.0.0.2'. *Deixe marcado a opção para criar o registro PTR*.
 
-<INSERIR IMAGEM AQUI>
+image::https://github.com/lamasbr/lamasbr.github.io/images/post-images/How-to-install-Squid-squid-Guard-using-NTLM-transparent-auth-Active-Directory-on-Ubuntu-16043-LTS/dns-add-proxy01.png[]
+
+image::https://github.com/lamasbr/lamasbr.github.io/images/post-images/How-to-install-Squid-squid-Guard-using-NTLM-transparent-auth-Active-Directory-on-Ubuntu-16043-LTS/dns-add-proxy02.png[]
+
 
 == Atualizando o Ubuntu
 
