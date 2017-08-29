@@ -164,7 +164,9 @@ challenge/response password authentication succeeded
 
 Caso tudo tenha ocorrido como esperado até aqui, prossiga para os próximos passos. Caso contrário, reveja as configurações pois algo pode ter passado despercebido ou algum arquivo ter sido configurado errado.
 
+=== Configurando o Squid
 
+A ESCREVER...
 
 
 
