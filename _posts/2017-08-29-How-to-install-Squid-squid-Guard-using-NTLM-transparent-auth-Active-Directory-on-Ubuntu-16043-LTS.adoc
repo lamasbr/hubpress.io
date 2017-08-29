@@ -36,15 +36,15 @@ IMPORTANT: Antes de instalar qualquer pacote na sua distribuição, é necessár
 Atualize o Ubuntu com o comando:
 
 [source,bash]
----
-# apt update ; apt upgrade
----
+----
+root@proxy~#: apt update ; apt upgrade
+----
 
-== Instalando e configurando os pacotes básicos e necessários
+=== Instalando e configurando os pacotes básicos e necessários
 
 [source,bash]
----
-# apt install squid squidguard telnet tcpdump ntpdate samba winbind vim tcpdump mc xz-utils rsync
----
+----
+root@proxy~#: apt install squid squidguard telnet tcpdump ntpdate samba winbind vim tcpdump mc xz-utils rsync
+----
 
 Continua... 
