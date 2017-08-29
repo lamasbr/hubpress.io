@@ -1,7 +1,50 @@
-= Instalando e configurando Squid + squidGuard  com autenticação transparente NTLM (Active Directory) no Ubuntu 16.04.3 LTS
+= Instalando e configurando Samba + Squid + squidGuard  com autenticação transparente NTLM (Active Directory) no Ubuntu 16.04.3 LTS
 // :hp-image: /covers/cover.png
 :published_at: 2017-08-29
 :hp-tags: Linux, Ubuntu, Squid, squidGuard, NTLM, Active Directory
 :hp-alt-title: How to install Squid + squidGuard using NTLM transparent auth (Active Directory) on Ubuntu 16.04.3 LTS
 
-Hahaha curioso? Vou atualizar esse post em breve!
+Acredito que qualquer organização que deixe o acesso à internet totalmente liberado para os seus colaboradores, além de perder em produtividade, está perdendo dinheiro. Até porque, tempo é dinheiro.
+
+Além disso, dependendo do ambiente da empresa, pode ser necessário filtrar o acesso dependendo do usuário, departamento e etc. Este é o caso da empresa onde atualmente trabalho e devido a largura de banda ser pequena somado à quantidade de dispositivos na rede e usuários acessando simultaneamente, foi necessário bloquear o acesso à maioria dos sites desnecessários ao desempenho do trabalho dos colaboradores.
+
+Para você ter chegado até aqui, acredito que já tenha o conhecimento necessário para instalar e configurar o Ubunto, utilizar editores de texto, visualizar logs e etc., pois não abordarei essas questões.
+
+Depois de muito procurar uma configuração que de fato funcionasse e precisei juntar informações de diversos sites, resolvi guardar e publicar aqui para que, caso eu precise novamente no futuro ou alguém que também esteja passando pela mesma dificuldade que passei, possa utilizar como fonte de consulta. Enfim, vamos ao que interessa.
+
+== Detalhando o ambiente
+
+- Domínio Active Directory: dominio.local
+- Servidor Active Directory: ad.dominio.local / IP: 10.0.0.1
+- Servidor Samba/proxy: proxy.dominio.local / IP: 10.0.0.2
+
+- Usuário Administrador do domínio: dominio\administrador
+- Senha do usuário administrador do domínio: 123456
+
+== Adicione o servidor Samba no DNS do Active Directory
+
+Para que a comunicação entre o Samba/Winbind e o Active Directory ocorra sem problemas, é necessário que você adicione o seu servidor Samba no DNS do seu Active Directory. 
+
+No seu controlador de domínio (ad.dominio.local), abra o console de gerenciamento do DNS, expanda a 'zona de pesquisa direta' e adicione a entrada do tipo 'Novo Host (A ou AAAA)' informando o nome como 'proxy' e o IP como '10.0.0.2'. *Deixe marcado a opção para criar o registro PTR*.
+
+<INSERIR IMAGEM AQUI>
+
+== Atualizando o Ubuntu
+
+IMPORTANT: Antes de instalar qualquer pacote na sua distribuição, é necessário atualizar o repositório para garantir que os pacotes em sua ultima versão serão instalados corretamente e não irá gerar nenhum erro de dependência.
+
+Atualize o Ubuntu com o comando:
+
+[source,bash]
+---
+# apt update ; apt upgrade
+---
+
+== Instalando e configurando os pacotes básicos e necessários
+
+[source,bash]
+---
+# apt install squid squidguard telnet tcpdump ntpdate samba winbind vim tcpdump mc xz-utils rsync
+---
+
+Continua... 
