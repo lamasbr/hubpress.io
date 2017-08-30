@@ -8,6 +8,8 @@ Acredito que qualquer organização que deixe o acesso à internet totalmente li
 
 Além disso, dependendo do ambiente da empresa, pode ser necessário filtrar o acesso dependendo do usuário, departamento e etc. Este é o caso da empresa onde atualmente trabalho e devido a largura de banda ser pequena somado à quantidade de dispositivos na rede e usuários acessando simultaneamente, foi necessário bloquear o acesso à maioria dos sites desnecessários ao desempenho do trabalho dos colaboradores.
 
+Preferi por filtrar a navegação utilizando grupo de acesso no AD, assim, quando quero liberar o acesso total à internet para um determinado usuário, basta adicioná-lo a este grupo e o acesso será irrestrito.
+
 Para você ter chegado até aqui, acredito que já tenha o conhecimento necessário para instalar e configurar o Ubunto, utilizar editores de texto, visualizar logs e etc., pois não abordarei essas questões.
 
 Depois de muito procurar uma configuração que de fato funcionasse e precisei juntar informações de diversos sites, resolvi guardar e publicar aqui para que, caso eu precise novamente no futuro ou alguém que também esteja passando pela mesma dificuldade que passei, possa utilizar como fonte de consulta. Enfim, vamos ao que interessa.
@@ -20,6 +22,14 @@ Depois de muito procurar uma configuração que de fato funcionasse e precisei j
 
 - Usuário Administrador do domínio: dominio\administrador
 - Senha do usuário administrador do domínio: 123456
+
+- Grupo no AD com acesso total à internet: Internet-Liberada
+
+- Conjunto de blacklists utilizado no squidGuard: http://shallalist.de/downloads/shallalist.tar.gz
+
+Neste exemplo, optei por utilizar a árvore padrão do Active Directory, sendo assim, os usuários e os grupos deverão ser criados dentro da OU Users. Para o usuário desejado tenha acesso irrestrito à internet, adicione-o ao grupo Internet-Liberada, para que seu acesso seja restrito, remova-o do grupo.
+
+Obviamente, você precisa alterar os detalhes do ambiente para que reflita à sua realidade. 
 
 == Adicione o servidor Samba no DNS do Active Directory
 
@@ -168,10 +178,744 @@ challenge/response password authentication succeeded
 Caso tudo tenha ocorrido como esperado até aqui, prossiga para os próximos passos. Caso contrário, reveja as configurações pois algo pode ter passado despercebido ou algum arquivo ter sido configurado errado.
 
 === Configurando o Squid
+==== Edite o arquivo /etc/squid/squid.conf
 
-A ESCREVER...
+Abaixo deixei a configuração do meu arquivo /etc/squid.conf, apague o arquivo /etc/squid.conf que vem com a instalação e deixe igual o meu abaixo:
 
+[source]
+----
+# Porta que o squid vai ouvir
+http_port 8080
 
+# Tempo que o squid vai aguardar para matar os sockets ativos 
+shutdown_lifetime 3 seconds
 
+# Usuário e grupo que o squid vai rodar
+cache_effective_user proxy
+cache_effective_group proxy
 
+# Sua rede interna que vai utilizar o squid
+acl localnet src 10.0.0.0/24	# 10.0.0.0 a 10.0.0.255
 
+# Helper responsável pela autenticação transparente (NTLM)
+auth_param ntlm program /usr/bin/ntlm_auth --helper-protocol=squid-2.5-ntlmssp
+auth_param ntlm children 30
+auth_param ntlm keep_alive on
+
+# Helper responsável pela autenticação digitando usuario e senha. É utilizado por dispositivos que não estão no domínio.
+auth_param basic program /usr/bin/ntlm_auth --helper-protocol=squid-2.5-basic
+auth_param basic children 5
+auth_param basic realm "AUTENTIQUE-SE PARA NAVEGAR NA INTERNET"
+auth_param basic credentialsttl 2 hours
+
+acl SSL_ports port 443
+acl SSL_ports port 8443
+
+acl Safe_ports port 80          # http
+acl Safe_ports port 21          # ftp
+acl Safe_ports port 443         # https
+acl Safe_ports port 70          # gopher
+acl Safe_ports port 210         # wais
+acl Safe_ports port 280         # http-mgmt
+acl Safe_ports port 488         # gss-http
+acl Safe_ports port 591         # filemaker
+acl Safe_ports port 777         # multiling http
+acl Safe_ports port 8443
+acl Safe_ports port 1025-65535  # unregistered ports
+
+acl CONNECT method CONNECT
+# Regra que obriga o uso do NTLM
+acl WINDOWS_AUTH proxy_auth REQUIRED
+
+http_access deny !Safe_ports
+http_access deny CONNECT !SSL_ports
+http_access allow localhost manager
+http_access deny manager
+
+# Lista de dominios que não deverão passar pela autenticação
+acl whitelist dstdomain "/etc/squid/whitelist.txt"
+
+http_access allow localhost
+# Libera o acesso aos sites que nao devem passar pela autenticação
+http_access allow whitelist
+# Libera o acesso somente aos usuarios autenticados
+http_access allow WINDOWS_AUTH
+http_access deny all
+
+coredump_dir /var/cache/squid
+cache_mem 768 MB
+cache_dir ufs /var/cache/squid 16000 16 256
+cache_replacement_policy heap LFUDA
+memory_replacement_policy heap GDSF
+maximum_object_size 10240 KB
+minimum_object_size 0 KB
+maximum_object_size_in_memory 64 KB
+
+access_log stdio:/var/log/squid/access.log squid
+cache_log /var/log/squid/cache.log
+
+refresh_pattern ^ftp:           1440    20%     10080
+refresh_pattern ^gopher:        1440    0%      1440
+refresh_pattern -i (/cgi-bin/|\?) 0     0%      0
+refresh_pattern .               0       20%     4320
+
+# Configura o squid para utilizar o squidGuard
+redirect_program /usr/bin/squidGuard -c /etc/squidguard/squidGuard.conf
+----
+
+==== Edite o arquivo /etc/squid/whitelist.txt
+
+Como comentado anteriormente, o arquivo /etc/squid/whitelist.txt é responsável por liberar o acesso sem autenticação para os domínios que estejam listados nele. Como aqui utilizamos o Office 2016 e Office 365, foi necessário liberar os domínios da MS e do Office por fora da autenticação para que funcionasse corretamente. Você vai precisar criá-lo e inserir os domínios que deseja liberar como eu fiz abaixo:
+
+[source]
+----
+# Office 365/2013/2016 whitelist
+.live.com
+.office.net
+.office.com
+.office365.com
+.officeclient.microsoft.com
+.appsforoffice.microsoft.com
+.o15.officeredir.microsoft.com
+.p.pfx.ms
+.office15client.microsoft.com
+.store.office.com
+.ocos-office365-s2s.msedge.net
+.client-office365-tas.msedge.net
+.officeimg.vo.msecnd.net
+.office.microsoft.com
+----
+
+==== Modifique o proprietário e grupo do diretório do squidGuard
+
+Para que o squid tenha acesso e possa executar o squidGuard, será necessário alterar o proprietário e o grupo do diretório /etc/squidguard, para isso, execute o comando:
+
+[source,bash]
+----
+root@proxy~#: chown proxy:proxy -R /etc/squidguard
+----
+
+=== Configurando o squidGuard
+==== Baixe e descompacte a blacklist
+
+Vamos baixar a blacklist do site shallalist e descompactar para dentro do diretório /var/lib/squidguard/db/ com o comando abaixo:
+
+[source,bash]
+----
+root@proxy~#: cd /var/lib/squidguard/db/
+root@proxy~#: wget http://shallalist.de/downloads/shallalist.tar.gz
+root@proxy~#: tar -zxvf shallalist.tar.gz
+----
+
+==== Edite o arquivo /etc/squidguard/squidGuard.conf
+
+Apague o conteúdo padrão do arquivo /etc/squidguard/squidGuard.conf e deixe conforme abaixo. Você pode negar o acesso ao site de determinada categoria, adicionando à categoria o operador !, ex: !adv. O arquivo de configuração está comentado para facilitar o entendimento:
+
+[source]
+----
+# Diretório onde estão armazenados os DBs das categorias da blacklist
+dbhome /var/lib/squidguard/db
+# Diretório de log do squidGuard
+logdir /var/log/squidguard
+
+# Usuário do AD que vai fazer a consulta se o usuário está no grupo Internet-Liberada
+ldapbinddn CN=Administrador,OU=Users,DC=dominio,DC=local
+# Senha do usuario 
+ldapbindpass 123456
+# Protocolo LDAP que será utilizado
+ldapprotover 3
+# Tempo de cache da consulta em segundos
+ldapcachetime 600
+
+# Grupo de acesso irrestrito à internet
+src Internet-Liberada {
+        ldapusersearch ldap://10.0.0.1:389/OU=Users,DC=dominio,DC=local?sAMAccountName?sub?(&(sAMAccountName=%s)(memberOf=CN=Internet-Liberada%2cOU=Users%2cDC=dominio%2cDC=local))
+}
+
+dest adv {
+        domainlist BL/adv/domains
+        urllist BL/adv/urls
+        log block.log
+}
+
+dest aggressive {
+        domainlist BL/aggressive/domains
+        urllist BL/aggressive/urls
+        log block.log
+}
+
+dest alcohol {
+        domainlist BL/alcohol/domains
+        urllist BL/alcohol/urls
+        log block.log
+}
+
+dest anonvpn {
+        domainlist BL/anonvpn/domains
+        urllist BL/anonvpn/urls
+        log block.log
+}
+
+dest automobile_bikes {
+        domainlist BL/automobile/bikes/domains
+        urllist BL/automobile/bikes/urls
+        log block.log
+}
+
+#
+dest automobile_boats {
+        domainlist BL/automobile/boats/domains
+        urllist BL/automobile/boats/urls
+        log block.log
+}
+
+dest automobile_cars {
+        domainlist BL/automobile/cars/domains
+        urllist BL/automobile/cars/urls
+        log block.log
+}
+
+#
+dest automobile_planes {
+        domainlist BL/automobile/planes/domains
+        urllist BL/automobile/planes/urls
+        log block.log
+}
+
+#
+dest chat {
+        domainlist BL/chat/domains
+        urllist BL/chat/urls
+        log block.log
+}
+
+#
+dest costtraps {
+        domainlist BL/costtraps/domains
+        urllist BL/costtraps/urls
+        log block.log
+}
+
+#
+dest dating {
+        domainlist BL/dating/domains
+        urllist BL/dating/urls
+        log block.log
+}
+
+#
+dest downloads {
+        domainlist BL/downloads/domains
+        urllist BL/downloads/urls
+        log block.log
+}
+
+#
+dest drugs {
+        domainlist BL/drugs/domains
+        urllist BL/drugs/urls
+        log block.log
+}
+
+#
+dest dynamic {
+        domainlist BL/dynamic/domains
+        urllist BL/dynamic/urls
+        log block.log
+}
+
+#
+dest education_schools {
+        domainlist BL/education/schools/domains
+        urllist BL/education/schools/urls
+        log block.log
+}
+
+#
+dest finance_banking {
+        domainlist BL/finance/banking/domains
+        urllist BL/finance/banking/urls
+        log block.log
+}
+
+#
+dest finance_insurance {
+        domainlist BL/finance/insurance/domains
+        urllist BL/finance/insurance/urls
+        log block.log
+}
+
+#
+dest finance_moneylending {
+        domainlist BL/finance/moneylending/domains
+        urllist BL/finance/moneylending/urls
+        log block.log
+}
+
+#
+dest finance_other {
+        domainlist BL/finance/other/domains
+        urllist BL/finance/other/urls
+        log block.log
+}
+
+dest finance_realestate {
+        domainlist BL/finance/realestate/domains
+        urllist BL/finance/realestate/urls
+        log block.log
+}
+
+dest finance_trading {
+        domainlist BL/finance/trading/domains
+        urllist BL/finance/trading/urls
+        log block.log
+}
+
+#
+dest fortunetelling {
+        domainlist BL/fortunetelling/domains
+        urllist BL/fortunetelling/urls
+        log block.log
+}
+
+#
+dest forum {
+        domainlist BL/forum/domains
+        urllist BL/forum/urls
+        log block.log
+}
+
+#
+dest gamble {
+        domainlist BL/gamble/domains
+        urllist BL/gamble/urls
+        log block.log
+}
+
+#
+dest government {
+        domainlist BL/government/domains
+        urllist BL/government/urls
+        log block.log
+}
+
+#
+dest hacking {
+        domainlist BL/hacking/domains
+        urllist BL/hacking/urls
+        log block.log
+}
+
+#
+dest hobby_cooking {
+        domainlist BL/hobby/cooking/domains
+        urllist BL/hobby/cooking/urls
+        log block.log
+}
+
+#
+dest hobby_games-misc {
+        domainlist BL/hobby/games-misc/domains
+        urllist BL/hobby/games-misc/urls
+        log block.log
+}
+
+#
+dest hobby_games-online {
+        domainlist BL/hobby/games-online/domains
+        urllist BL/hobby/games-online/urls
+        log block.log
+}
+
+#
+dest hobby_gardening {
+        domainlist BL/hobby/gardening/domains
+        urllist BL/hobby/gardening/urls
+        log block.log
+}
+
+#
+dest hobby_pets {
+        domainlist BL/hobby/pets/domains
+        urllist BL/hobby/pets/urls
+        log block.log
+}
+
+#
+dest homestyle {
+        domainlist BL/homestyle/domains
+        urllist BL/homestyle/urls
+        log block.log
+}
+
+#
+dest hospitals {
+        domainlist BL/hospitals/domains
+        urllist BL/hospitals/urls
+        log block.log
+}
+
+#
+dest imagehosting {
+        domainlist BL/imagehosting/domains
+        urllist BL/imagehosting/urls
+        log block.log
+}
+
+#
+dest isp {
+        domainlist BL/isp/domains
+        urllist BL/isp/urls
+        log block.log
+}
+
+#
+dest jobsearch {
+        domainlist BL/jobsearch/domains
+        urllist BL/jobsearch/urls
+        log block.log
+}
+
+#
+dest library {
+        domainlist BL/library/domains
+        urllist BL/library/urls
+        log block.log
+}
+
+#
+dest military {
+        domainlist BL/military/domains
+        urllist BL/military/urls
+        log block.log
+}
+
+#
+dest models {
+        domainlist BL/models/domains
+        urllist BL/models/urls
+        log block.log
+}
+
+#
+dest movies {
+        domainlist BL/movies/domains
+        urllist BL/movies/urls
+        log block.log
+}
+
+#
+dest music {
+        domainlist BL/music/domains
+        urllist BL/music/urls
+        log block.log
+}
+
+#
+dest news {
+        domainlist BL/news/domains
+        urllist BL/news/urls
+        log block.log
+}
+
+#
+dest podcasts {
+        domainlist BL/podcasts/domains
+        urllist BL/podcasts/urls
+        log block.log
+}
+
+#
+dest politics {
+        domainlist BL/politics/domains
+        urllist BL/politics/urls
+        log block.log
+}
+
+#
+dest porn {
+        domainlist BL/porn/domains
+        urllist BL/porn/urls
+        log block.log
+}
+
+#
+dest radiotv {
+        domainlist BL/radiotv/domains
+        urllist BL/radiotv/urls
+        log block.log
+}
+
+#
+dest recreation_humor {
+        domainlist BL/recreation/humor/domains
+        urllist BL/recreation/humor/urls
+        log block.log
+}
+
+#
+dest recreation_martialarts {
+        domainlist BL/recreation/martialarts/domains
+        urllist BL/recreation/martialarts/urls
+        log block.log
+}
+
+#
+dest recreation_restaurants {
+        domainlist BL/recreation/restaurants/domains
+        urllist BL/recreation/restaurants/urls
+        log block.log
+}
+
+#
+dest recreation_sports {
+        domainlist BL/recreation/sports/domains
+        urllist BL/recreation/sports/urls
+        log block.log
+}
+
+#
+dest recreation_travel {
+        domainlist BL/recreation/travel/domains
+        urllist BL/recreation/travel/urls
+        log block.log
+}
+
+#
+dest recreation_wellness {
+        domainlist BL/recreation/wellness/domains
+        urllist BL/recreation/wellness/urls
+        log block.log
+}
+
+#
+dest redirector {
+        domainlist BL/redirector/domains
+        urllist BL/redirector/urls
+        log block.log
+}
+
+#
+dest religion {
+        domainlist BL/religion/domains
+        urllist BL/religion/urls
+        log block.log
+}
+
+#
+dest remotecontrol {
+        domainlist BL/remotecontrol/domains
+        urllist BL/remotecontrol/urls
+        log block.log
+}
+
+#
+dest ringtones {
+        domainlist BL/ringtones/domains
+        urllist BL/ringtones/urls
+        log block.log
+}
+
+#
+dest science_astronomy {
+        domainlist BL/science/astronomy/domains
+        urllist BL/science/astronomy/urls
+        log block.log
+}
+
+#
+dest science_chemistry {
+        domainlist BL/science/chemistry/domains
+        urllist BL/science/chemistry/urls
+        log block.log
+}
+
+#
+dest searchengines {
+        domainlist BL/searchengines/domains
+        urllist BL/searchengines/urls
+        log block.log
+}
+
+#
+dest sex_education {
+        domainlist BL/sex/education/domains
+        urllist BL/sex/education/urls
+        log block.log
+}
+
+#
+dest sex_lingerie {
+        domainlist BL/sex/lingerie/domains
+        urllist BL/sex/lingerie/urls
+        log block.log
+}
+
+#
+dest shopping {
+        domainlist BL/shopping/domains
+        urllist BL/shopping/urls
+        log block.log
+}
+
+#
+dest socialnet {
+        domainlist BL/socialnet/domains
+        urllist BL/socialnet/urls
+        log block.log
+}
+
+#
+dest spyware {
+        domainlist BL/spyware/domains
+        urllist BL/spyware/urls
+        log block.log
+}
+
+#
+dest tracker {
+        domainlist BL/tracker/domains
+        urllist BL/tracker/urls
+        log block.log
+}
+
+#
+dest updatesites {
+        domainlist BL/updatesites/domains
+        urllist BL/updatesites/urls
+        log block.log
+}
+
+#
+dest urlshortener {
+        domainlist BL/urlshortener/domains
+        urllist BL/urlshortener/urls
+        log block.log
+}
+
+#
+dest violence {
+        domainlist BL/violence/domains
+        urllist BL/violence/urls
+        log block.log
+}
+
+#
+dest warez {
+        domainlist BL/warez/domains
+        urllist BL/warez/urls
+        log block.log
+}
+
+#
+dest weapons {
+        domainlist BL/weapons/domains
+        urllist BL/weapons/urls
+        log block.log
+}
+
+#
+dest webmail {
+        domainlist BL/webmail/domains
+        urllist BL/webmail/urls
+        log block.log
+}
+
+#
+dest webphone {
+        domainlist BL/webphone/domains
+        urllist BL/webphone/urls
+        log block.log
+}
+
+#
+dest webradio {
+        domainlist BL/webradio/domains
+        urllist BL/webradio/urls
+        log block.log
+}
+
+#
+dest webtv {
+        domainlist BL/webtv/domains
+        urllist BL/webtv/urls
+        log block.log
+}
+
+# Reescreve a URL de busca nos buscadores adicionando o parametro de safesearch para não exibir conteúdo adulto/ofensivo
+rew safesearch  {
+        s@(google\..*/search?.*q=.*)@\1\&safe=active@i
+        s@(google\..*/images.*q=.*)@\1\&safe=active@i
+        s@(google\..*/groups.*q=.*)@\1\&safe=active@i
+        s@(google\..*/news.*q=.*)@\1\&safe=active@i
+        s@(yandex\..*/yandsearch?.*text=.*)@\1\&fyandex=1@i
+        s@(search\.yahoo\..*/search.*p=.*)@\1\&vm=r&v=1@i
+        s@(search\.live\..*/.*q=.*)@\1\&adlt=strict@i
+        s@(search\.msn\..*/.*q=.*)@\1\&adlt=strict@i
+        s@(\.bing\..*/.*q=.*)@\1\&adlt=strict@i
+        log block.log
+}
+
+acl {
+
+	# Acesso padrao (para todos os usuários autenticados que não estiverem no grupo Internet-Liberada)
+	default {
+		pass government hospitals searchengines webmail education_schools finance_banking finance_insurance finance_other finance_realestate finance_trading fortunetelling hobby_cooking hobby_gardening hobby_pets homestyle jobsearch military news politics recreation_humor recreation_martialarts recreation_restaurants recreation_sports recreation_travel recreation_wellness religion remotecontrol science_astronomy science_chemistry shopping !adv !aggressive !alcohol !anonvpn !automobile_bikes !automobile_boats !automobile_cars !automobile_planes !chat !costtraps !dating !downloads !drugs !dynamic !finance_moneylending !forum !gamble !hacking !hobby_games-misc !hobby_games-online !imagehosting !isp !library !models !movies!music !podcasts !porn !radiotv !redirector !ringtones !sex_education !sex_lingerie !socialnet !spyware !tracker !updatesites !urlshortener !violence !warez !weapons !webphone !webradio !webtv all
+        # Habilita a reescrita na busca safesearch
+		rewrite safesearch
+        # Caso o usuário tente acessar algum site bloqueado, é redirecionado à uma URL que você queira, para facilitar aqui, configurei para redirecionar para o Google
+		redirect https://www.google.com.br/
+	}
+
+	# Regra de acesso ao grupo Internet-Liberada
+	Internet-Liberada {
+    	# No caso deste grupo, preferi por bloquear somente dominios e URLs de AdServers
+		pass !adv all
+		redirect https://www.google.com.br/
+	}
+}
+----
+
+Feito isso, nosso Samba, squid e squidGuard já estão configurados para autenticar e liberar o acesso à internet conforme o grupo do usuário. O último passo será gerar o database da blacklist utilizada e alterar o grupo dela para que o squid/squidGuard possa utilizar.
+
+==== Gerando o database da Blacklist e alterando o proprietário/grupo
+
+Utilize o comando abaixo para que o squidGuard faça a leitura dos arquivos de domínio e URL da blacklist utilizada e gere o database necessário para execução:
+
+[source,bash]
+----
+root@proxy~#: /usr/bin/squidGuard -C all
+----
+
+O parâmetro -C all significa que o squidGuard irá ler e gerar o database para todas as categorias de blacklists que foram configuradas no arquivo /etc/squidguard/squidGuard.conf. Caso insira ou remova algum domínio ou URL de alguma categoria de blacklist, será necessário gerar o database novamente. Neste caso, você pode gerar o database de uma categoria específica com o comando:
+
+[source,bash]
+----
+root@proxy~#: /usr/bin/squidGuard -C movies
+----
+
+Será necessário setar o proprietário e o grupo dos databases todas as vezes que gerá-los, sendo assim, execute o comando abaixo:
+
+[source,bash]
+----
+root@proxy~#: chown proxy:proxy -R /var/lib/squidguard
+----
+
+=== Tudo feito! Hora de rodar!
+
+Após seguir todos os passos, é hora de rodar o squid para que nossos computadores possam navegar na internet. Para isso, execute:
+
+[source,bash]
+----
+root@proxy~#: /etc/init.d/squid start
+----
+
+Se tudo foi configurado corretamente, basta configurar o IP:PORTA do proxy nos computadores que deseja que utilizem o proxy. No caso dessa nossa configuração, o IP do proxy é 10.0.0.2 e a porta configurada no squid é 8080!
+
+== Considerações finais
+
+Como estamos utilizando Active Directory, você pode criar uma GPO para que configure o proxy automaticamente nas estações de trabalho. Além disso, também pode utilizar seu servidor DHCP para configurar automaticamente o servidor proxy através do arquivp WPAD.DAT.
+
+Abordarei como proceder com essa configuração em um proximo artigo.
+
+Espero que tenha tido sucesso e caso tenha alguma dúvida ou sugestão de melhoria, deixe seu comentário aí embaixo!
