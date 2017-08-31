@@ -1,0 +1,54 @@
+= Instalando o Oracle Java 8 JDK no Debian 9 "Stretch" usando o APT
+:published_at: 2017-08-31
+:hp-tags: Java, JDK, Debian, APT
+:hp-alt-title: Installing Oracle Java 8 JDK on Debian 9 "Stretch" using APT
+
+Ao tentar instalar o Java JDK no Debian 9, por omissão é instlado o OpenJDK. Por escolha própria, sem nenhum critério específico, preferi instalar o JDK da Oracle, que não está disponível no repositório padrão do Debian.
+
+== Instalando o Oracle Java 
+
+Para instalar o Oracle Java, precisamos adicionar o repositório Webupd que é desenvolvido para o Ubuntu, mas funciona normalmente no Debian. Para adicionar o repositório, inicialmente precisamos instalar o pacote software-properties-common que tem o executável add-apt-repository:
+
+[source,bash]
+----
+root@lamasbr~#: apt update
+root@lamasbr~#: apt install software-properties-common dirmngr
+----
+
+Agora adicionamos o repositório e em seguida adicionamos a chave:
+
+[source,bash]
+----
+root@lamasbr~#: add-apt-repository "deb http://ppa.launchpad.net/webupd8team/java/ubuntu yakkety main"
+root@lamasbr~#: apt-key adv --keyserver keyserver.ubuntu.com --recv-keys C2518248EEA14886
+----
+
+Para instalar o Oracle Java 8, vamos atualizar os repositórios e instalar o pacote oracle-java8-installer:
+
+[source,bash]
+----
+root@lamasbr~#: apt update
+root@lamasbr~#: apt install oracle-java8-installer
+----
+
+No decorrer da instalação, será solicitado que você aceite o acordo de licença de usuário final (EULA) do Oracle Java, aceite para que a instalação seja realizada.
+
+== Verificando a instalação
+
+Quando a instalação terminar, você pode verificar se o Java JDK foi instalado corretamente com o comando:
+
+[source,bash]
+----
+root@lamasbr~#: java -version
+----
+
+Se a saída do comando acima for parecido com algo como abaixo, o Oracle Java 8 está instalado no seu Debian 9!
+
+[source]
+----
+java version "1.8.0_131"
+Java(TM) SE Runtime Environment (build 1.8.0_131-b11)
+Java HotSpot(TM) 64-Bit Server VM (build 25.131-b11, mixed mode)
+----
+
+Até mais!
