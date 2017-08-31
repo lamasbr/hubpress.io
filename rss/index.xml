@@ -1,4 +1,71 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Anotações para não esquecer]]></title><description><![CDATA[Algumas anotações importantes (ou não) pra mim!]]></description><link>https://lamasbr.github.io</link><generator>RSS for Node</generator><lastBuildDate>Wed, 30 Aug 2017 05:59:25 GMT</lastBuildDate><atom:link href="https://lamasbr.github.io/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Instalando e configurando Samba + Squid + squidGuard  com autenticação transparente NTLM (Active Directory) no Ubuntu 16.04.3 LTS]]></title><description><![CDATA[<div id="preamble">
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Anotações para não esquecer]]></title><description><![CDATA[Algumas anotações importantes (ou não) pra mim!]]></description><link>https://lamasbr.github.io</link><generator>RSS for Node</generator><lastBuildDate>Thu, 31 Aug 2017 04:12:43 GMT</lastBuildDate><atom:link href="https://lamasbr.github.io/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Instalando o Oracle Java 8 JDK no Debian 9 "Stretch" usando o APT]]></title><description><![CDATA[<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Ao tentar instalar o Java JDK no Debian 9, por omissão é instlado o OpenJDK. Por escolha própria, sem nenhum critério específico, preferi instalar o JDK da Oracle, que não está disponível no repositório padrão do Debian.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_instalando_o_oracle_java">Instalando o Oracle Java</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Para instalar o Oracle Java, precisamos adicionar o repositório Webupd que é desenvolvido para o Ubuntu, mas funciona normalmente no Debian. Para adicionar o repositório, inicialmente precisamos instalar o pacote software-properties-common que tem o executável add-apt-repository:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">root@lamasbr~#: apt update
+root@lamasbr~#: apt install software-properties-common dirmngr</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Agora adicionamos o repositório e em seguida adicionamos a chave:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">root@lamasbr~#: add-apt-repository "deb http://ppa.launchpad.net/webupd8team/java/ubuntu yakkety main"
+root@lamasbr~#: apt-key adv --keyserver keyserver.ubuntu.com --recv-keys C2518248EEA14886</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Para instalar o Oracle Java 8, vamos atualizar os repositórios e instalar o pacote oracle-java8-installer:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">root@lamasbr~#: apt update
+root@lamasbr~#: apt install oracle-java8-installer</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>No decorrer da instalação, será solicitado que você aceite o acordo de licença de usuário final (EULA) do Oracle Java, aceite para que a instalação seja realizada.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_verificando_a_instala_o">Verificando a instalação</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Quando a instalação terminar, você pode verificar se o Java JDK foi instalado corretamente com o comando:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">root@lamasbr~#: java -version</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Se a saída do comando acima for parecido com algo como abaixo, o Oracle Java 8 está instalado no seu Debian 9!</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>java version "1.8.0_131"
+Java(TM) SE Runtime Environment (build 1.8.0_131-b11)
+Java HotSpot(TM) 64-Bit Server VM (build 25.131-b11, mixed mode)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Até mais!</p>
+</div>
+</div>
+</div>]]></description><link>https://lamasbr.github.io/2017/08/31/Installing-Oracle-Java-8-JDK-on-Debian-9-Stretch-using-APT.html</link><guid isPermaLink="true">https://lamasbr.github.io/2017/08/31/Installing-Oracle-Java-8-JDK-on-Debian-9-Stretch-using-APT.html</guid><category><![CDATA[Java]]></category><category><![CDATA[JDK]]></category><category><![CDATA[Debian]]></category><category><![CDATA[APT]]></category><dc:creator><![CDATA[Lincoln Lamas]]></dc:creator><pubDate>Thu, 31 Aug 2017 00:00:00 GMT</pubDate></item><item><title><![CDATA[Instalando e configurando Samba + Squid + squidGuard  com autenticação transparente NTLM (Active Directory) no Ubuntu 16.04.3 LTS]]></title><description><![CDATA[<div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
 <p>Acredito que qualquer organização que deixe o acesso à internet totalmente liberado para os seus colaboradores, além de perder em produtividade, está perdendo dinheiro. Até porque, tempo é dinheiro.</p>
