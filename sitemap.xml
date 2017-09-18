@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+
+<url>
+  <loc>https://lamasbr.github.io/</loc>
+  <lastmod>2017-09-18T17:11:35+00:00</lastmod>
+  <changefreq>daily</changefreq>
+</url>
+<url>
+  <loc>https://lamasbr.github.io/2017/09/18/Error-Windows-cannot-find-the-Microsoft-Software-License-Terms-installing-Windows-Server-2012-R2-on-Hyper-V.html</loc>
+  <lastmod>2017-09-18T17:11:34+00:00</lastmod>
+  <changefreq>daily</changefreq>
+</url>
+<url>
+  <loc>https://lamasbr.github.io/author/lamasbr/</loc>
+  <lastmod>2017-09-18T17:11:34+00:00</lastmod>
+  <changefreq>daily</changefreq>
+</url>
+<url>
+  <loc>https://lamasbr.github.io/tag/Microsoft-Software-License-Terms/</loc>
+  <lastmod>2017-09-18T17:11:35+00:00</lastmod>
+  <changefreq>daily</changefreq>
+</url>
+<url>
+  <loc>https://lamasbr.github.io/tag/Windows-Server-2012-R2/</loc>
+  <lastmod>2017-09-18T17:11:35+00:00</lastmod>
+  <changefreq>daily</changefreq>
+</url>
+<url>
+  <loc>https://lamasbr.github.io/tag/Hyper-V/</loc>
+  <lastmod>2017-09-18T17:11:35+00:00</lastmod>
+  <changefreq>daily</changefreq>
+</url>
+<url>
+  <loc>https://lamasbr.github.io/tag/Error-0x-C0000005/</loc>
+  <lastmod>2017-09-18T17:11:35+00:00</lastmod>
+  <changefreq>daily</changefreq>
+</url>
+<url>
+  <loc>https://lamasbr.github.io/2017/08/31/Installing-Oracle-Java-8-JDK-on-Debian-9-Stretch-using-APT.html</loc>
+  <lastmod>2017-09-18T17:11:34+00:00</lastmod>
+  <changefreq>daily</changefreq>
+</url>
+<url>
+  <loc>https://lamasbr.github.io/tag/Java/</loc>
+  <lastmod>2017-09-18T17:11:35+00:00</lastmod>
+  <changefreq>daily</changefreq>
+</url>
+<url>
+  <loc>https://lamasbr.github.io/tag/JDK/</loc>
+  <lastmod>2017-09-18T17:11:35+00:00</lastmod>
+  <changefreq>daily</changefreq>
+</url>
+<url>
+  <loc>https://lamasbr.github.io/tag/Debian/</loc>
+  <lastmod>2017-09-18T17:11:35+00:00</lastmod>
+  <changefreq>daily</changefreq>
+</url>
+<url>
+  <loc>https://lamasbr.github.io/tag/APT/</loc>
+  <lastmod>2017-09-18T17:11:35+00:00</lastmod>
+  <changefreq>daily</changefreq>
+</url>
+<url>
+  <loc>https://lamasbr.github.io/2017/08/29/How-to-install-Samba-Squid-squid-Guard-using-NTLM-transparent-auth-Active-Directory-on-Ubuntu-16043-LTS.html</loc>
+  <lastmod>2017-09-18T17:11:34+00:00</lastmod>
+  <changefreq>daily</changefreq>
+</url>
+<url>
+  <loc>https://lamasbr.github.io/tag/Linux/</loc>
+  <lastmod>2017-09-18T17:11:35+00:00</lastmod>
+  <changefreq>daily</changefreq>
+</url>
+<url>
+  <loc>https://lamasbr.github.io/tag/Ubuntu/</loc>
+  <lastmod>2017-09-18T17:11:35+00:00</lastmod>
+  <changefreq>daily</changefreq>
+</url>
+<url>
+  <loc>https://lamasbr.github.io/tag/Squid/</loc>
+  <lastmod>2017-09-18T17:11:35+00:00</lastmod>
+  <changefreq>daily</changefreq>
+</url>
+<url>
+  <loc>https://lamasbr.github.io/tag/Samba/</loc>
+  <lastmod>2017-09-18T17:11:35+00:00</lastmod>
+  <changefreq>daily</changefreq>
+</url>
+<url>
+  <loc>https://lamasbr.github.io/tag/squid-Guard/</loc>
+  <lastmod>2017-09-18T17:11:35+00:00</lastmod>
+  <changefreq>daily</changefreq>
+</url>
+<url>
+  <loc>https://lamasbr.github.io/tag/NTLM/</loc>
+  <lastmod>2017-09-18T17:11:35+00:00</lastmod>
+  <changefreq>daily</changefreq>
+</url>
+<url>
+  <loc>https://lamasbr.github.io/tag/Active-Directory/</loc>
+  <lastmod>2017-09-18T17:11:35+00:00</lastmod>
+  <changefreq>daily</changefreq>
+</url>
+</urlset>
