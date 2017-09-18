@@ -4,4 +4,16 @@
 :hp-tags: Microsoft Software License Terms, Windows Server 2012 R2, Hyper-V, Error 0xC0000005,
 :hp-alt-title: Error Windows cannot find the Microsoft Software License Terms installing Windows Server 2012 R2 on Hyper-V
 
-image::https://lamasbr.github.io/images/post-images/How-to-install-Squid-squid-Guard-using-NTLM-transparent-auth-Active-Directory-on-Ubuntu-16043-LTS/dns-add-proxy01.png[]
+=== Sintoma
+
+Ao instalar o Windows Server 2012 R2 no Hyper-V, o erro abaixo é exibido no início da instalação:
+
+image::/images/post-images/Error-Windows-cannot-find-the-Microsoft-Software-License-Terms-installing-Windows-Server-2012-R2-on-Hyper-V/Tela01.png[]
+
+Depois de quebrar a cabeça achando que o problema poderia ser a mídia que estava utilizando, descobri que a solução é mais simples do que se parece.
+
+=== Solução
+
+Abra a configuração da máquina virtual criada e altere a memória configurada (RAM de inicialização) de 512Mb para 576Mb e voilà!
+
+image::/images/post-images/Error-Windows-cannot-find-the-Microsoft-Software-License-Terms-installing-Windows-Server-2012-R2-on-Hyper-V/Tela02.png[]
