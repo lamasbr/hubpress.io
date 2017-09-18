@@ -1,0 +1,7 @@
+= Erro Windows cannot find the Microsoft Software License Terms instalando Windows Server 2012 R2 no Hyper-V
+
+:published_at: 2017-09-18
+:hp-tags: Microsoft Software License Terms, Windows Server 2012 R2, Hyper-V, Error 0xC0000005,
+:hp-alt-title: Error Windows cannot find the Microsoft Software License Terms installing Windows Server 2012 R2 on Hyper-V
+
+image::https://lamasbr.github.io/images/post-images/How-to-install-Squid-squid-Guard-using-NTLM-transparent-auth-Active-Directory-on-Ubuntu-16043-LTS/dns-add-proxy01.png[]
