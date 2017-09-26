@@ -1,0 +1,81 @@
+= Como instalar WSUS (Windows Server Update Services) utilizando o Windows Internal Database (WID) no Windows Server 2012 R2
+
+:published_at: 2017-09-26
+:hp-tags: Microsoft, Windows Server 2012 R2, Hyper-V, WSUS, Windows Server Update Services, WID, Windows Internal Database
+:hp-alt-title: How to install WSUS using Windows Internal Database (WID) on Windows Server 2012 R2
+
+O Windows Server 2012 R2 será instalado em uma máquina virtual, utilizando Hyper-V com 579Mb de RAM de inicialização e memória dinâmica habilitada, sendo 576Mb de RAM mínima e 4096Mb de RAM máxima.
+
+image::/images/post-images/How-to-install-WSUS-using-WID-on-Windows-Server-2012-R2/00.Hyper-V_configuracao_de_memoria.png[]
+
+Prosseguimos com a instalação padrão do Windows Server 2012 R2 com as opções conforme abaixo e clicando na tela seguinte em "Install now":
+
+image::/images/post-images/How-to-install-WSUS-using-WID-on-Windows-Server-2012-R2/01.Install-language,time,keyboard.png[]
+
+image::/images/post-images/How-to-install-WSUS-using-WID-on-Windows-Server-2012-R2/01.Install-now.png[]
+
+image::/images/post-images/How-to-install-WSUS-using-WID-on-Windows-Server-2012-R2/01.Installing.png[]
+
+Quando a instalação terminar, a máquina virtual será reiniciada e o Windows Server 2012 R2 será startado. Após a inicialização do servidor, será pedido para digitar a senha do Administrador antes de fazer logon. Assim, que escolhido a senha, faça login e faça as configurações de rede, domínio e etc do seu servidor.
+
+Aqui vamos utilizar as seguintes configurações:
+- Nome do servidor: wsus
+- Domínio: dominio.local
+- IP do servidor WSUS: 10.0.0.2/255.255.255.0
+- IP do gateway: 10.0.0.1
+
+=== Fazendo as configurações usando Windows PowerShell
+
+Para treinar o uso do PowerShell, vamos fazer as configurações do sistema utilizando o PowerShell. O PowerShell veio para substituir o cmd (ou command), então vamos deixar o cmd morrer. Todos os comandos são executados no console do PowerShell como administrador.
+
+==== Renomeando o computador 
+
+[source,powershell]
+----
+PS C:\> Rename-Computer -NewName "WSUS" -Restart
+----
+
+Após executar o comando acima, o nome do servidor será alterado para WSUS e irá reiniciar.
+
+==== Inserindo o computador no domínio
+
+[source,powershell]
+----
+PS C:\> Add-Computer -DomainName "dominio.local" -Credential dominio\Administrador -Restart
+----
+
+Após executar o comando acima, será pedido a senha do usuário Administrador do domínio, o servidor será inserido no domínio e irá reiniciar.
+
+==== Instalando WSUS 
+
+Vamos utilizar o cmdlet Get-WindowsFeature para visualizar quais são os recursos do WSUS
+
+[source,powershell]
+----
+PS C:\> Get-WindowsFeature -Name UpdateServices*
+----
+
+image::/images/post-images/How-to-install-WSUS-using-WID-on-Windows-Server-2012-R2/02.GetFeature-WSUS-PowerShell.png[]
+
+Vamos instalar o WSUS utilizando o cmdlet Install-WindowsFeature da seguinte forma:
+
+[source,powershell]
+----
+PS C:\> Install-WindowsFeature -Name UpdateServices -IncludeManagementTools
+----
+
+A instalação se iniciará e logo que terminar, será exibido uma mensagem de que ainda precisamos executar alguns passos pós-instalação. Felizmente, tudo o que precisamos fazer depois é executar o WSUSUtil.exe, passando o diretório onde serão armazenados os arquivos de atualização que serão baixados do Windows Update.
+
+image::/images/post-images/How-to-install-WSUS-using-WID-on-Windows-Server-2012-R2/02.Install-WSUS-PowerShell01.png[]
+image::/images/post-images/How-to-install-WSUS-using-WID-on-Windows-Server-2012-R2/02.Install-WSUS-PowerShell02.png[]
+
+Sendo assim, vamos criar o diretório WSUS na raiz do C:\, e logo em seguida executar o comando para finalizar a instalação e subir o WSUS:
+
+[source,powershell]
+----
+PS C:\> New-Item -Path C: -Name WSUS -ItemType Directory
+PS C:\> sl 'C:\Program Files\Update Services\Tools'
+PS C:\> .\WsusUtil.exe postinstall CONTENT_DIR=C:\WSUS
+----
+
+image::/images/post-images/How-to-install-WSUS-using-WID-on-Windows-Server-2012-R2/02.Install-WSUS-PowerShell03.png[]
