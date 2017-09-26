@@ -1,4 +1,4 @@
-= Como instalar WSUS (Windows Server Update Services) utilizando o Windows Internal Database (WID) no Windows Server 2012 R2
+= Como instalar WSUS (Windows Server Update Services) utilizando o Windows Internal Database (WID) no Windows Server 2012 R2 - Parte 1
 
 :published_at: 2017-09-26
 :hp-tags: Microsoft, Windows Server 2012 R2, Hyper-V, WSUS, Windows Server Update Services, WID, Windows Internal Database
@@ -79,3 +79,16 @@ PS C:\> .\WsusUtil.exe postinstall CONTENT_DIR=C:\WSUS
 ----
 
 image::/images/post-images/How-to-install-WSUS-using-WID-on-Windows-Server-2012-R2/02.Install-WSUS-PowerShell03.png[]
+
+==== Configurando o WSUS 
+
+Caso não tenha atualizado ainda seu Windows Server 2012 R2, será necessário baixar manualmente algumas atualizações antes que possamos configurar o WSUS. Caso seja seu caso, baixe e instale as atualizações abaixo na ordem explicada. Caso já tenha atualizado seu Windows Server através do Windows Update, verifique se as atualizações já estão instaladas.
+- 2919442 - http://www.microsoft.com/downloads/details.aspx?familyid=a30ef618-cf1e-4604-9dc1-28b0df9d1723 
+- 2919355 - http://www.microsoft.com/downloads/details.aspx?familyid=373b1bb0-6d55-462e-98b7-6cb7d9ef1448 - Observe que as atualizações desse pacote devem ser instaladas na ordem: clearcompressionflag.exe, KB2919355, KB2932046, KB2959977, KB2937592, KB2938439 e KB2934018.
+- 3095113 - http://www.microsoft.com/downloads/details.aspx?familyid=8b4f6c12-06b3-4cc8-8308-91902cfdf958
+
+Além disso, para distribuir updates e upgrades do Windows 10 (como a versão Creators Update, por exemplo), é necessário configurar o IIS para reconhecer a extensão de arquivo .esd. Para isso, abra o console de gerenciamento do IIS (Server Manager > Tools > Internet Information Services Manager), clique no nome do seu servidor, e dê duplo clique em MIME Types. Clique com o botão direito e logo após em Add... Adicione conforme a imagem abaixo:
+
+image::/images/post-images/How-to-install-WSUS-using-WID-on-Windows-Server-2012-R2/03.Configure-IIS-ESDExtension.png[]
+
+Abra o console de gerenciamento do WSUS através do Server Manager > Tools > Windows Server Update Services. Clique em Options para abrir as opções de configuração. Vou me ater a explicar a configuração básica para atualizar as estações de trabalho na sua rede através de GPO, ou seja, suas estações precisam estar em um domínio. 
