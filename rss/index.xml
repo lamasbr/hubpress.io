@@ -1,4 +1,86 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Anotações para não esquecer]]></title><description><![CDATA[Algumas anotações importantes (ou não) pra mim!]]></description><link>https://lamasbr.github.io</link><generator>RSS for Node</generator><lastBuildDate>Tue, 26 Sep 2017 20:56:45 GMT</lastBuildDate><atom:link href="https://lamasbr.github.io/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Como instalar WSUS (Windows Server Update Services) utilizando o Windows Internal Database (WID) no Windows Server 2012 R2 - Parte 1]]></title><description><![CDATA[<div id="preamble">
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Anotações para não esquecer]]></title><description><![CDATA[Algumas anotações importantes (ou não) pra mim!]]></description><link>https://lamasbr.github.io</link><generator>RSS for Node</generator><lastBuildDate>Mon, 05 Mar 2018 16:19:30 GMT</lastBuildDate><atom:link href="https://lamasbr.github.io/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Como montar compartilhamentos de rede Windows (CIFS ou SMBFS) no Linux]]></title><description><![CDATA[<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Se você chegou até aqui, então passou pela mesma dúvida que eu tive e precisei recorrer ao Google: como faço pra montar um diretório compartilhado do Windows no meu servidor Linux?</p>
+</div>
+<div class="paragraph">
+<p>Sendo esta sua dúvida ou não, vamos logo ao que interessa.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_para_essa_receita_voc_vai_precisar">Para essa receita você vai precisar:</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Acesso root no Linux</p>
+</li>
+<li>
+<p>Caminho do compartilhamento (//servidor/compartilhamento ou //192.168.0.1/compartilhamento)</p>
+</li>
+<li>
+<p>Usuário e senha do Windows com permissão de acesso ao compartilhamento</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_modo_de_preparo">Modo de preparo:</h2>
+<div class="sectionbody">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Faça login no Linux como root ou execute os comandos com o sudo</p>
+</li>
+<li>
+<p>Crie um diretório para montar o compartilhamento:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash"># mkdir -p /mnt/windows</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Use o comando mount para montar o compartilhamento no diretório criado:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash"># mount -t cifs //servidor/compartilhamento -o username=usuario,password=senha /mnt/windows</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Acesse o compartilhamento com os comandos:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash"># cd /mnt/windows ; ls -l</code></pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Pronto, o diretório compartilhado já está montado no seu servidor Linux!</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_dica_extra">Dica extra</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Se você quiser montar o compartilhamento automaticamente na inicialização do seu servidor linux, inclua esta linha no final do seu arquivo /etc/fstab:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">//servidor/compartilhamento /mnt/windows cifs rw,username=usuario,password=senha 0 0</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Fonte: <a href="https://www.cyberciti.biz/tips/how-to-mount-remote-windows-partition-windows-share-under-linux.html" target="_blank">nixCraft</a></p>
+</div>
+</div>
+</div>]]></description><link>https://lamasbr.github.io/2018/03/05/How-to-mount-Windows-shared-folders-cifs-or-smbfs-in-Linux.html</link><guid isPermaLink="true">https://lamasbr.github.io/2018/03/05/How-to-mount-Windows-shared-folders-cifs-or-smbfs-in-Linux.html</guid><category><![CDATA[Windows]]></category><category><![CDATA[Linux]]></category><category><![CDATA[CIFS]]></category><category><![CDATA[SMBFS]]></category><dc:creator><![CDATA[Lincoln Lamas]]></dc:creator><pubDate>Mon, 05 Mar 2018 00:00:00 GMT</pubDate></item><item><title><![CDATA[Como instalar WSUS (Windows Server Update Services) utilizando o Windows Internal Database (WID) no Windows Server 2012 R2 - Parte 1]]></title><description><![CDATA[<div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
 <p>O Windows Server 2012 R2 será instalado em uma máquina virtual, utilizando Hyper-V com 579Mb de RAM de inicialização e memória dinâmica habilitada, sendo 576Mb de RAM mínima e 4096Mb de RAM máxima.</p>
