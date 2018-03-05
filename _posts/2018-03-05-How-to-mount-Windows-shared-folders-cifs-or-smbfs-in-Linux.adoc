@@ -1,0 +1,50 @@
+= Como montar compartilhamentos de rede Windows (CIFS ou SMBFS) no Linux
+// See https://hubpress.gitbooks.io/hubpress-knowledgebase/content/ for information about the parameters.
+// :hp-image: /covers/cover.png
+:published_at: 2018-03-05
+:hp-tags: Windows, Linux, CIFS, SMBFS, 
+:hp-alt-title: How to mount Windows shared folders (cifs or smbfs) in Linux
+
+Se você chegou até aqui, então passou pela mesma dúvida que eu tive e precisei recorrer ao Google: como faço pra montar um diretório compartilhado do Windows no meu servidor Linux?
+
+Sendo esta sua dúvida ou não, vamos logo ao que interessa.
+
+== Para essa receita você vai precisar:
+
+* Acesso root no Linux 
+* Caminho do compartilhamento (//servidor/compartilhamento ou //192.168.0.1/compartilhamento)
+* Usuário e senha do Windows com permissão de acesso ao compartilhamento
+
+== Modo de preparo:
+
+. Faça login no Linux como root ou execute os comandos com o sudo
+. Crie um diretório para montar o compartilhamento:
++
+[source, bash]
+-------
+# mkdir -p /mnt/windows
+-------
+. Use o comando mount para montar o compartilhamento no diretório criado:
++
+[source, bash]
+-----------------
+# mount -t cifs //servidor/compartilhamento -o username=usuario,password=senha /mnt/windows
+-----------------
+. Acesse o compartilhamento com os comandos:
++
+[source, bash]
+-----------------
+# cd /mnt/windows ; ls -l
+-----------------
+
+Pronto, o diretório compartilhado já está montado no seu servidor Linux!
+
+== Dica extra
+
+Se você quiser montar o compartilhamento automaticamente na inicialização do seu servidor linux, inclua esta linha no final do seu arquivo /etc/fstab:
+[source, bash]
+----------
+//servidor/compartilhamento /mnt/windows cifs rw,username=usuario,password=senha 0 0
+----------
+
+Fonte: https://www.cyberciti.biz/tips/how-to-mount-remote-windows-partition-windows-share-under-linux.html[nixCraft^]
