@@ -2,31 +2,10 @@
   "meta": {
     "username": "lamasbr",
     "repositoryName": "lamasbr.github.io",
-    "branch": "master",
-    "cname": ""
+    "branch": "master"
   },
   "theme": {
-    "name": "casper"
-  },
-  "urls": {
-    "site": "https://lamasbr.github.io",
-    "hubpress": "https://lamasbr.github.io",
-    "theme": "//lamasbr.github.io/themes/Casper",
-    "images": "https://lamasbr.github.io/images"
-  },
-  "initialisationConfigComponent": {
-    "name": "initialise-configuration",
-    "computed": {},
-    "methods": {},
-    "staticRenderFns": [
-      null,
-      null,
-      null
-    ],
-    "_compiled": true,
-    "beforeCreate": [
-      null
-    ]
+    "name": "Casper"
   },
   "site": {
     "title": "lamasbr notebook's",
