@@ -2,16 +2,17 @@
   "meta": {
     "username": "lamasbr",
     "repositoryName": "lamasbr.github.io",
-    "branch": "master"
+    "branch": "master",
+    "cname": ""
   },
   "theme": {
-    "name": "Casper"
+    "name": "casper"
   },
   "site": {
     "title": "lamasbr notebook's",
     "description": "Se eu escrevi aqui é pra não esquecer!",
     "logo": "",
-    "cover": "",
+    "cover": "//i.imgur.com/z0MAuhe.jpg",
     "delay": "",
     "postsPerPage": "",
     "googleAnalytics": "UA-1318013-15",
@@ -32,5 +33,25 @@
     "paypalme": "",
     "opencollective": ""
   },
-  "navigation": []
+  "navigation": [],
+  "urls": {
+    "site": "https://lamasbr.github.io",
+    "hubpress": "https://lamasbr.github.io",
+    "theme": "//lamasbr.github.io/themes/casper",
+    "images": "https://lamasbr.github.io/images"
+  },
+  "initialisationConfigComponent": {
+    "name": "initialise-configuration",
+    "computed": {},
+    "methods": {},
+    "staticRenderFns": [
+      null,
+      null,
+      null
+    ],
+    "_compiled": true,
+    "beforeCreate": [
+      null
+    ]
+  }
 }
