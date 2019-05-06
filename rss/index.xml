@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[lamasbr notebook's]]></title><description><![CDATA[Se eu escrevi aqui é pra não esquecer!]]></description><link>https://lamasbr.github.io</link><generator>RSS for Node</generator><lastBuildDate>Mon, 05 Mar 2018 16:23:47 GMT</lastBuildDate><atom:link href="https://lamasbr.github.io/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Como montar compartilhamentos de rede Windows (CIFS ou SMBFS) no Linux]]></title><description><![CDATA[<div id="preamble">
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[lamasbr notebook's]]></title><description><![CDATA[Se eu escrevi aqui é pra não esquecer!]]></description><link>https://lamasbr.github.io</link><generator>RSS for Node</generator><lastBuildDate>Mon, 06 May 2019 19:49:22 GMT</lastBuildDate><atom:link href="https://lamasbr.github.io/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Como montar compartilhamentos de rede Windows (CIFS ou SMBFS) no Linux]]></title><description><![CDATA[<div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
 <p>Se você chegou até aqui, então passou pela mesma dúvida que eu tive e precisei recorrer ao Google: como faço pra montar um diretório compartilhado do Windows no meu servidor Linux?</p>
@@ -9,7 +9,7 @@
 </div>
 </div>
 <div class="sect1">
-<h2 id="_para_essa_receita_voc_vai_precisar">Para essa receita você vai precisar:</h2>
+<h2 id="_para_essa_receita_você_vai_precisar">Para essa receita você vai precisar:</h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
@@ -77,7 +77,7 @@
 </div>
 </div>
 <div class="paragraph">
-<p>Fonte: <a href="https://www.cyberciti.biz/tips/how-to-mount-remote-windows-partition-windows-share-under-linux.html" target="_blank">nixCraft</a></p>
+<p>Fonte: <a href="https://www.cyberciti.biz/tips/how-to-mount-remote-windows-partition-windows-share-under-linux.html" target="_blank" rel="noopener">nixCraft</a></p>
 </div>
 </div>
 </div>]]></description><link>https://lamasbr.github.io/2018/03/05/How-to-mount-Windows-shared-folders-cifs-or-smbfs-in-Linux.html</link><guid isPermaLink="true">https://lamasbr.github.io/2018/03/05/How-to-mount-Windows-shared-folders-cifs-or-smbfs-in-Linux.html</guid><category><![CDATA[Windows]]></category><category><![CDATA[Linux]]></category><category><![CDATA[CIFS]]></category><category><![CDATA[SMBFS]]></category><dc:creator><![CDATA[Lincoln Lamas]]></dc:creator><pubDate>Mon, 05 Mar 2018 00:00:00 GMT</pubDate></item><item><title><![CDATA[Como instalar WSUS (Windows Server Update Services) utilizando o Windows Internal Database (WID) no Windows Server 2012 R2 - Parte 1]]></title><description><![CDATA[<div id="preamble">
@@ -87,7 +87,7 @@
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="/images/post-images/How-to-install-WSUS-using-WID-on-Windows-Server-2012-R2/00.Hyper-V_configuracao_de_memoria.png" alt="00.Hyper V configuracao de memoria.png">
+<img src="/images/post-images/How-to-install-WSUS-using-WID-on-Windows-Server-2012-R2/00.Hyper-V_configuracao_de_memoria.png" alt="00.Hyper V configuracao de memoria">
 </div>
 </div>
 <div class="paragraph">
@@ -95,17 +95,17 @@
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="/images/post-images/How-to-install-WSUS-using-WID-on-Windows-Server-2012-R2/01.Install-language,time,keyboard.png" alt="01.Install language,time,keyboard.png">
+<img src="/images/post-images/How-to-install-WSUS-using-WID-on-Windows-Server-2012-R2/01.Install-language,time,keyboard.png" alt="01.Install language,time,keyboard">
 </div>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="/images/post-images/How-to-install-WSUS-using-WID-on-Windows-Server-2012-R2/01.Install-now.png" alt="01.Install now.png">
+<img src="/images/post-images/How-to-install-WSUS-using-WID-on-Windows-Server-2012-R2/01.Install-now.png" alt="01.Install now">
 </div>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="/images/post-images/How-to-install-WSUS-using-WID-on-Windows-Server-2012-R2/01.Installing.png" alt="01.Installing.png">
+<img src="/images/post-images/How-to-install-WSUS-using-WID-on-Windows-Server-2012-R2/01.Installing.png" alt="01.Installing">
 </div>
 </div>
 <div class="paragraph">
@@ -121,7 +121,7 @@
 </div>
 </div>
 <div class="sect2">
-<h3 id="_fazendo_as_configura_es_usando_windows_powershell">Fazendo as configurações usando Windows PowerShell</h3>
+<h3 id="_fazendo_as_configurações_usando_windows_powershell">Fazendo as configurações usando Windows PowerShell</h3>
 <div class="paragraph">
 <p>Para treinar o uso do PowerShell, vamos fazer as configurações do sistema utilizando o PowerShell. O PowerShell veio para substituir o cmd (ou command), então vamos deixar o cmd morrer. Todos os comandos são executados no console do PowerShell como administrador.</p>
 </div>
@@ -137,7 +137,7 @@
 </div>
 </div>
 <div class="sect3">
-<h4 id="_inserindo_o_computador_no_dom_nio">Inserindo o computador no domínio</h4>
+<h4 id="_inserindo_o_computador_no_domínio">Inserindo o computador no domínio</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-powershell" data-lang="powershell">PS C:\&gt; Add-Computer -DomainName "dominio.local" -Credential dominio\Administrador -Restart</code></pre>
@@ -159,7 +159,7 @@
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="/images/post-images/How-to-install-WSUS-using-WID-on-Windows-Server-2012-R2/02.GetFeature-WSUS-PowerShell.png" alt="02.GetFeature WSUS PowerShell.png">
+<img src="/images/post-images/How-to-install-WSUS-using-WID-on-Windows-Server-2012-R2/02.GetFeature-WSUS-PowerShell.png" alt="02.GetFeature WSUS PowerShell">
 </div>
 </div>
 <div class="paragraph">
@@ -175,12 +175,12 @@
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="/images/post-images/How-to-install-WSUS-using-WID-on-Windows-Server-2012-R2/02.Install-WSUS-PowerShell01.png" alt="02.Install WSUS PowerShell01.png">
+<img src="/images/post-images/How-to-install-WSUS-using-WID-on-Windows-Server-2012-R2/02.Install-WSUS-PowerShell01.png" alt="02.Install WSUS PowerShell01">
 </div>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="/images/post-images/How-to-install-WSUS-using-WID-on-Windows-Server-2012-R2/02.Install-WSUS-PowerShell02.png" alt="02.Install WSUS PowerShell02.png">
+<img src="/images/post-images/How-to-install-WSUS-using-WID-on-Windows-Server-2012-R2/02.Install-WSUS-PowerShell02.png" alt="02.Install WSUS PowerShell02">
 </div>
 </div>
 <div class="paragraph">
@@ -195,7 +195,7 @@ PS C:\&gt; .\WsusUtil.exe postinstall CONTENT_DIR=C:\WSUS</code></pre>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="/images/post-images/How-to-install-WSUS-using-WID-on-Windows-Server-2012-R2/02.Install-WSUS-PowerShell03.png" alt="02.Install WSUS PowerShell03.png">
+<img src="/images/post-images/How-to-install-WSUS-using-WID-on-Windows-Server-2012-R2/02.Install-WSUS-PowerShell03.png" alt="02.Install WSUS PowerShell03">
 </div>
 </div>
 </div>
@@ -212,21 +212,21 @@ PS C:\&gt; .\WsusUtil.exe postinstall CONTENT_DIR=C:\WSUS</code></pre>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="/images/post-images/How-to-install-WSUS-using-WID-on-Windows-Server-2012-R2/03.Configure-IIS-ESDExtension.png" alt="03.Configure IIS ESDExtension.png">
+<img src="/images/post-images/How-to-install-WSUS-using-WID-on-Windows-Server-2012-R2/03.Configure-IIS-ESDExtension.png" alt="03.Configure IIS ESDExtension">
 </div>
 </div>
 <div class="paragraph">
 <p>Abra o console de gerenciamento do WSUS através do Server Manager &gt; Tools &gt; Windows Server Update Services. Clique em Options para abrir as opções de configuração. Vou me ater a explicar a configuração básica para atualizar as estações de trabalho na sua rede através de GPO, ou seja, suas estações precisam estar em um domínio.</p>
 </div>
 </div>
-</div>]]></description><link>https://lamasbr.github.io/2017/09/26/How-to-install-WSUS-using-Windows-Internal-Database-WID-on-Windows-Server-2012-R2.html</link><guid isPermaLink="true">https://lamasbr.github.io/2017/09/26/How-to-install-WSUS-using-Windows-Internal-Database-WID-on-Windows-Server-2012-R2.html</guid><category><![CDATA[Microsoft]]></category><category><![CDATA[Windows Server 2012 R2]]></category><category><![CDATA[Hyper-V]]></category><category><![CDATA[WSUS]]></category><category><![CDATA[Windows Server Update Services]]></category><category><![CDATA[WID]]></category><category><![CDATA[Windows Internal Database]]></category><dc:creator><![CDATA[Lincoln Lamas]]></dc:creator><pubDate>Tue, 26 Sep 2017 00:00:00 GMT</pubDate></item><item><title><![CDATA[Erro Windows cannot find the Microsoft Software License Terms instalando Windows Server 2012 R2 no Hyper-V]]></title><description><![CDATA[<div class="sect2">
+</div>]]></description><link>https://lamasbr.github.io/2017/09/26/How-to-install-WSUS-using-Windows-Internal-Database-WID-on-Windows-Server-2012-R2.html</link><guid isPermaLink="true">https://lamasbr.github.io/2017/09/26/How-to-install-WSUS-using-Windows-Internal-Database-WID-on-Windows-Server-2012-R2.html</guid><dc:creator><![CDATA[Lincoln Lamas]]></dc:creator><pubDate>Tue, 26 Sep 2017 00:00:00 GMT</pubDate></item><item><title><![CDATA[Erro Windows cannot find the Microsoft Software License Terms instalando Windows Server 2012 R2 no Hyper-V]]></title><description><![CDATA[<div class="sect2">
 <h3 id="_sintoma">Sintoma</h3>
 <div class="paragraph">
 <p>Ao instalar o Windows Server 2012 R2 no Hyper-V, o erro abaixo é exibido no início da instalação:</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="/images/post-images/Error-Windows-cannot-find-the-Microsoft-Software-License-Terms-installing-Windows-Server-2012-R2-on-Hyper-V/Tela01.png" alt="Tela01.png">
+<img src="/images/post-images/Error-Windows-cannot-find-the-Microsoft-Software-License-Terms-installing-Windows-Server-2012-R2-on-Hyper-V/Tela01.png" alt="Tela01">
 </div>
 </div>
 <div class="paragraph">
@@ -234,16 +234,16 @@ PS C:\&gt; .\WsusUtil.exe postinstall CONTENT_DIR=C:\WSUS</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_solu_o">Solução</h3>
+<h3 id="_solução">Solução</h3>
 <div class="paragraph">
 <p>Abra a configuração da máquina virtual criada e altere a memória configurada (RAM de inicialização) de 512Mb para 576Mb e voilà!</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="/images/post-images/Error-Windows-cannot-find-the-Microsoft-Software-License-Terms-installing-Windows-Server-2012-R2-on-Hyper-V/Tela02.png" alt="Tela02.png">
+<img src="/images/post-images/Error-Windows-cannot-find-the-Microsoft-Software-License-Terms-installing-Windows-Server-2012-R2-on-Hyper-V/Tela02.png" alt="Tela02">
 </div>
 </div>
-</div>]]></description><link>https://lamasbr.github.io/2017/09/18/Error-Windows-cannot-find-the-Microsoft-Software-License-Terms-installing-Windows-Server-2012-R2-on-Hyper-V.html</link><guid isPermaLink="true">https://lamasbr.github.io/2017/09/18/Error-Windows-cannot-find-the-Microsoft-Software-License-Terms-installing-Windows-Server-2012-R2-on-Hyper-V.html</guid><category><![CDATA[Microsoft Software License Terms]]></category><category><![CDATA[Windows Server 2012 R2]]></category><category><![CDATA[Hyper-V]]></category><category><![CDATA[Error 0xC0000005]]></category><dc:creator><![CDATA[Lincoln Lamas]]></dc:creator><pubDate>Mon, 18 Sep 2017 00:00:00 GMT</pubDate></item><item><title><![CDATA[Instalando o Oracle Java 8 JDK no Debian 9 "Stretch" usando o APT]]></title><description><![CDATA[<div id="preamble">
+</div>]]></description><link>https://lamasbr.github.io/2017/09/18/Error-Windows-cannot-find-the-Microsoft-Software-License-Terms-installing-Windows-Server-2012-R2-on-Hyper-V.html</link><guid isPermaLink="true">https://lamasbr.github.io/2017/09/18/Error-Windows-cannot-find-the-Microsoft-Software-License-Terms-installing-Windows-Server-2012-R2-on-Hyper-V.html</guid><dc:creator><![CDATA[Lincoln Lamas]]></dc:creator><pubDate>Mon, 18 Sep 2017 00:00:00 GMT</pubDate></item><item><title><![CDATA[Instalando o Oracle Java 8 JDK no Debian 9 "Stretch" usando o APT]]></title><description><![CDATA[<div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
 <p>Ao tentar instalar o Java JDK no Debian 9, por omissão é instlado o OpenJDK. Por escolha própria, sem nenhum critério específico, preferi instalar o JDK da Oracle, que não está disponível no repositório padrão do Debian.</p>
@@ -286,7 +286,7 @@ root@lamasbr~#: apt install oracle-java8-installer</code></pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_verificando_a_instala_o">Verificando a instalação</h2>
+<h2 id="_verificando_a_instalação">Verificando a instalação</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Quando a instalação terminar, você pode verificar se o Java JDK foi instalado corretamente com o comando:</p>
@@ -376,12 +376,12 @@ Java HotSpot(TM) 64-Bit Server VM (build 25.131-b11, mixed mode)</code></pre>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="https://lamasbr.github.io/images/post-images/How-to-install-Squid-squid-Guard-using-NTLM-transparent-auth-Active-Directory-on-Ubuntu-16043-LTS/dns-add-proxy01.png" alt="dns add proxy01.png">
+<img src="https://lamasbr.github.io/images/post-images/How-to-install-Squid-squid-Guard-using-NTLM-transparent-auth-Active-Directory-on-Ubuntu-16043-LTS/dns-add-proxy01.png" alt="dns add proxy01">
 </div>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="https://lamasbr.github.io/images/post-images/How-to-install-Squid-squid-Guard-using-NTLM-transparent-auth-Active-Directory-on-Ubuntu-16043-LTS/dns-add-proxy02.png" alt="dns add proxy02.png">
+<img src="https://lamasbr.github.io/images/post-images/How-to-install-Squid-squid-Guard-using-NTLM-transparent-auth-Active-Directory-on-Ubuntu-16043-LTS/dns-add-proxy02.png" alt="dns add proxy02">
 </div>
 </div>
 </div>
@@ -410,7 +410,7 @@ Antes de instalar qualquer pacote na sua distribuição, é necessário atualiza
 </div>
 </div>
 <div class="sect2">
-<h3 id="_instalando_e_configurando_os_pacotes_b_sicos_e_necess_rios">Instalando e configurando os pacotes básicos e necessários</h3>
+<h3 id="_instalando_e_configurando_os_pacotes_básicos_e_necessários">Instalando e configurando os pacotes básicos e necessários</h3>
 <div class="paragraph">
 <p>Instale os pacotes necessários utilizando comando abaixo:</p>
 </div>
@@ -477,7 +477,7 @@ Antes de instalar qualquer pacote na sua distribuição, é necessário atualiza
 </div>
 </div>
 <div class="sect3">
-<h4 id="_inserindo_o_samba_no_dom_nio">Inserindo o Samba no domínio</h4>
+<h4 id="_inserindo_o_samba_no_domínio">Inserindo o Samba no domínio</h4>
 <div class="paragraph">
 <p>Insira o servidor Samba no domínio com o comando:</p>
 </div>
@@ -532,7 +532,7 @@ chown root:proxy /var/lib/samba/winbindd_privileged/ || return 1</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_testando_a_comunica_o_do_samba_winbind_com_o_servidor_active_directory">Testando a comunicação do Samba/Winbind com o servidor Active Directory</h3>
+<h3 id="_testando_a_comunicação_do_samba_winbind_com_o_servidor_active_directory">Testando a comunicação do Samba/Winbind com o servidor Active Directory</h3>
 <div class="paragraph">
 <p>Para assegurar que o seu servidor Samba/Winbind está comunicando perfeitamente com o servidor Active Directory, execute os comandos abaixo. Cada comando deverá retornar exatamente como exibido:</p>
 </div>
@@ -675,7 +675,7 @@ redirect_program /usr/bin/squidGuard -c /etc/squidguard/squidGuard.conf</code></
 </div>
 </div>
 <div class="sect3">
-<h4 id="_modifique_o_propriet_rio_e_grupo_do_diret_rio_do_squidguard">Modifique o proprietário e grupo do diretório do squidGuard</h4>
+<h4 id="_modifique_o_proprietário_e_grupo_do_diretório_do_squidguard">Modifique o proprietário e grupo do diretório do squidGuard</h4>
 <div class="paragraph">
 <p>Para que o squid tenha acesso e possa executar o squidGuard, será necessário alterar o proprietário e o grupo do diretório /etc/squidguard, para isso, execute o comando:</p>
 </div>
@@ -1276,7 +1276,7 @@ acl {
 </div>
 </div>
 <div class="sect3">
-<h4 id="_gerando_o_database_da_blacklist_e_alterando_o_propriet_rio_grupo">Gerando o database da Blacklist e alterando o proprietário/grupo</h4>
+<h4 id="_gerando_o_database_da_blacklist_e_alterando_o_proprietário_grupo">Gerando o database da Blacklist e alterando o proprietário/grupo</h4>
 <div class="paragraph">
 <p>Utilize o comando abaixo para que o squidGuard faça a leitura dos arquivos de domínio e URL da blacklist utilizada e gere o database necessário para execução:</p>
 </div>
@@ -1320,7 +1320,7 @@ acl {
 </div>
 </div>
 <div class="sect1">
-<h2 id="_considera_es_finais">Considerações finais</h2>
+<h2 id="_considerações_finais">Considerações finais</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Como estamos utilizando Active Directory, você pode criar uma GPO para que configure o proxy automaticamente nas estações de trabalho. Além disso, também pode utilizar seu servidor DHCP para configurar automaticamente o servidor proxy através do arquivp WPAD.DAT.</p>
