@@ -33,7 +33,12 @@
     "paypalme": "",
     "opencollective": ""
   },
-  "navigation": [],
+  "navigation": [
+    {
+      "label": "Interlli.ga",
+      "url": "https://interlli.ga"
+    }
+  ],
   "urls": {
     "site": "https://lamasbr.github.io",
     "hubpress": "https://lamasbr.github.io",
