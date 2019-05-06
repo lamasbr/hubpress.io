@@ -6,7 +6,7 @@
     "cname": ""
   },
   "theme": {
-    "name": "ghostium"
+    "name": "casper"
   },
   "site": {
     "title": "lamasbr notebook's",
@@ -37,7 +37,7 @@
   "urls": {
     "site": "https://lamasbr.github.io",
     "hubpress": "https://lamasbr.github.io",
-    "theme": "//lamasbr.github.io/themes/saga",
+    "theme": "//lamasbr.github.io/themes/casper",
     "images": "https://lamasbr.github.io/images"
   },
   "initialisationConfigComponent": {
