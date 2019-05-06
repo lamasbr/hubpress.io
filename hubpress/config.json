@@ -21,14 +21,14 @@
   },
   "socialnetwork": {
     "email": "",
-    "github": "lamasbr",
-    "twitter": "lamasbr",
-    "facebook": "llsilvabr",
+    "github": "https://github.com/lamasbr",
+    "twitter": "https://twitter.com/lamasbr",
+    "facebook": "https://fb.me/llsilvabr",
     "googleplus": "",
-    "instagram": "lamasbr",
+    "instagram": "https://instagram.com/lamasbr",
     "pinterest": "",
     "flickr": "",
-    "linkedin": "llamas",
+    "linkedin": "https://linkedin.com/llamas",
     "stackoverflow": "",
     "paypalme": "",
     "opencollective": ""
@@ -37,7 +37,7 @@
   "urls": {
     "site": "https://lamasbr.github.io",
     "hubpress": "https://lamasbr.github.io",
-    "theme": "//lamasbr.github.io/themes/ghostium",
+    "theme": "//lamasbr.github.io/themes/casper",
     "images": "https://lamasbr.github.io/images"
   },
   "initialisationConfigComponent": {
