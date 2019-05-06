@@ -37,7 +37,7 @@
   "urls": {
     "site": "https://lamasbr.github.io",
     "hubpress": "https://lamasbr.github.io",
-    "theme": "//lamasbr.github.io/themes/casper",
+    "theme": "//lamasbr.github.io/themes/ghostium",
     "images": "https://lamasbr.github.io/images"
   },
   "initialisationConfigComponent": {
