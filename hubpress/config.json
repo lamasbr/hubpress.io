@@ -6,12 +6,12 @@
     "cname": ""
   },
   "theme": {
-    "name": "Casper"
+    "name": "casper"
   },
   "urls": {
     "site": "https://lamasbr.github.io",
     "hubpress": "https://lamasbr.github.io",
-    "theme": "//lamasbr.github.io/themes/casper",
+    "theme": "//lamasbr.github.io/themes/Casper",
     "images": "https://lamasbr.github.io/images"
   },
   "initialisationConfigComponent": {
