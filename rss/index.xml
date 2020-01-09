@@ -1,4 +1,88 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[lamasbr notebook's]]></title><description><![CDATA[Se eu escrevi aqui é pra não esquecer!]]></description><link>https://lamasbr.github.io</link><image><url>https://i.imgur.com/z0MAuhe.jpg</url><title>lamasbr notebook&apos;s</title><link>https://lamasbr.github.io</link></image><generator>RSS for Node</generator><lastBuildDate>Mon, 06 May 2019 20:16:56 GMT</lastBuildDate><atom:link href="https://lamasbr.github.io/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Como montar compartilhamentos de rede Windows (CIFS ou SMBFS) no Linux]]></title><description><![CDATA[<div id="preamble">
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[lamasbr notebook's]]></title><description><![CDATA[Se eu escrevi aqui é pra não esquecer!]]></description><link>https://lamasbr.github.io</link><image><url>https://i.imgur.com/z0MAuhe.jpg</url><title>lamasbr notebook&apos;s</title><link>https://lamasbr.github.io</link></image><generator>RSS for Node</generator><lastBuildDate>Thu, 09 Jan 2020 20:37:49 GMT</lastBuildDate><atom:link href="https://lamasbr.github.io/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Como instalar o docker (docker-ce) e docker-compose no Linux Mint 19.3 (Tricia)]]></title><description><![CDATA[<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Apesar de já conhecer essa distribuição Linux há algum tempo, nunca havia experimentado até então e estou gostando pela simplicidade e leveza.</p>
+</div>
+<div class="paragraph">
+<p>Porém como o assunto não é esse, vamos nos ater ao foco do post: como instalar o docker-ce (community edition) no Linux Mint 19.3 Tricia?</p>
+</div>
+<div class="paragraph">
+<p>Todos os comandos abaixo serão executados no terminal e você precisa ter acesso ao usuário root ou permissão de uso do comando SUDO.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_instale_as_dependências_necessárias">Instale as dependências necessárias:</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">sudo apt -y update
+sudo apt -y install apt-transport-https ca-certificates curl software-properties-common</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_adicione_a_chave_gpg_do_repositório_oficial_do_docker_no_sistema">Adicione a chave GPG do repositório oficial do Docker no sistema</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Importe a chave utilizando o comando abaixo:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_adicione_o_repositório_do_docker">Adicione o repositório do Docker</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Adicione o repositório oficial do Docker no seu Linux Mint 19.3 para que você possa instalar a última versão estável do Docker:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(. /etc/os-release; echo "$UBUNTU_CODENAME") stable"</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Caso gere algum erro, retire o trecho [arch=amd64] do comando e tente novamente. Caso não tenha gerado nenhum erro, atualize os repositórios com o comando <code>sudo apt update</code>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_instale_o_docker_engine_e_o_docker_compose">Instale o Docker Engine e o Docker Compose</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Para instalar a última versão estável do docker-ce e do docker-compose, digite o comando abaixo:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">sudo apt install -y docker-ce docker-compose</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Em seguida, habilite-o na inicialização do sistema com o comando:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">sudo systemctl enable docker.service</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Adicione seu usuário no grupo docker:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">sudo usermod -aG docker $USER</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Feito isso o docker estará instalado no seu sistema. Antes de começar utilizá-lo, é necessário reiniciar o seu computador para que alteraçõers no usuário façam efeito.</p>
+</div>
+</div>
+</div>]]></description><link>https://lamasbr.github.io/2020/01/09/How-to-install-docker-and-docker-compose-on-Linux-Mint-193-Tricia.html</link><guid isPermaLink="true">https://lamasbr.github.io/2020/01/09/How-to-install-docker-and-docker-compose-on-Linux-Mint-193-Tricia.html</guid><category><![CDATA[Linux]]></category><category><![CDATA[Mint]]></category><category><![CDATA[Tricia]]></category><category><![CDATA[Docker]]></category><category><![CDATA[docker-compose]]></category><dc:creator><![CDATA[Lincoln Lamas]]></dc:creator><pubDate>Thu, 09 Jan 2020 00:00:00 GMT</pubDate></item><item><title><![CDATA[Como montar compartilhamentos de rede Windows (CIFS ou SMBFS) no Linux]]></title><description><![CDATA[<div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
 <p>Se você chegou até aqui, então passou pela mesma dúvida que eu tive e precisei recorrer ao Google: como faço pra montar um diretório compartilhado do Windows no meu servidor Linux?</p>
