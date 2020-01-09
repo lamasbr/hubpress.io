@@ -1,0 +1,64 @@
+= Como instalar o docker (docker-ce) e docker-compose no Linux Mint 19.3 (Tricia)
+:published_at: 2020-01-09
+:hp-tags: Linux, Mint, Tricia, Docker, docker-compose 
+:hp-alt-title: How to install docker and docker-compose on Linux Mint 19.3 (Tricia)
+
+Apesar de já conhecer essa distribuição Linux há algum tempo, nunca havia experimentado até então e estou gostando pela simplicidade e leveza. 
+
+Porém como o assunto não é esse, vamos nos ater ao foco do post: como instalar o docker-ce (community edition) no Linux Mint 19.3 Tricia?
+
+Todos os comandos abaixo serão executados no terminal e você precisa ter acesso ao usuário root ou permissão de uso do comando SUDO.
+
+== Instale as dependências necessárias:
+
+[source, bash]
+-------
+sudo apt -y update
+sudo apt -y install apt-transport-https ca-certificates curl software-properties-common
+-------
+
+== Adicione a chave GPG do repositório oficial do Docker no sistema
+
+Importe a chave utilizando o comando abaixo:
+
+[source, bash]
+-------
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+-------
+
+== Adicione o repositório do Docker
+
+Adicione o repositório oficial do Docker no seu Linux Mint 19.3 para que você possa instalar a última versão estável do Docker:
+
+[source, bash]
+-------
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(. /etc/os-release; echo "$UBUNTU_CODENAME") stable"
+-------
+
+Caso gere algum erro, retire o trecho [arch=amd64] do comando e tente novamente. Caso não tenha gerado nenhum erro, atualize os repositórios com o comando `sudo apt update`.
+
+== Instale o Docker Engine e o Docker Compose 
+
+Para instalar a última versão estável do docker-ce e do docker-compose, digite o comando abaixo:
+
+[source, bash]
+-------
+sudo apt install -y docker-ce docker-compose
+-------
+
+Em seguida, habilite-o na inicialização do sistema com o comando:
+
+[source, bash]
+-------
+sudo systemctl enable docker.service
+-------
+
+Adicione seu usuário no grupo docker:
+
+[source, bash]
+-------
+sudo usermod -aG docker $USER
+-------
+
+
+Feito isso o docker estará instalado no seu sistema. Antes de começar utilizá-lo, é necessário reiniciar o seu computador para que alteraçõers no usuário façam efeito.
